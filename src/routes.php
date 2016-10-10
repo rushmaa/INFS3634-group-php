@@ -5,15 +5,15 @@ require_once("dao/JournalDao.php");
 // Routes
 
 $app->get('/users', function ($request, $response, $args) {
-    return $response->withJson(UserDao::getUsers());
+  return $response->withJson(UserDao::getUsers());
 });
 
 $app->get('/students', function ($request, $response, $args) {
-    return $response->withJson(UserDao::getStudents());
+  return $response->withJson(UserDao::getStudents());
 });
 
 $app->get('/admins', function ($request, $response, $args) {
-    return $response->withJson(UserDao::getAdmins());
+  return $response->withJson(UserDao::getAdmins());
 });
 
 $app->post('/users/login', function ($request, $response, $args) {
@@ -25,6 +25,17 @@ $app->post('/users/login', function ($request, $response, $args) {
   } else {
     return $response->withStatus(404, 'Not FOund');
   }
+});
+
+$app->post('/users', function ($request, $response, $args) {
+  $user = array(
+    'userId' => $request->getParam('userId'),
+    'username' => $request->getParam('username'),
+    'password' => $request->getParam('password'),
+    'name' => $request->getParam('name'),
+    'isAdmin' => $request->getParam('isAdmin')
+  );
+  return $response->withJson(UserDao::saveOrUpdate($user));
 });
 
 $app->get('/users/{id}/journals', function ($request, $response, $args) {

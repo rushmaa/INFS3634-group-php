@@ -2,7 +2,7 @@
 require_once("BaseDao.php");
 
 class UserDAO extends BaseDAO {
-    
+
 
     // Retrieves the corresponding row for the specified user ID.
     public static function getById($userId) {
@@ -63,7 +63,7 @@ class UserDAO extends BaseDAO {
         }
         $conn->close();
         return $users;
-    }    
+    }
 
     public static function getAdmins() {
         $users = array();
@@ -78,5 +78,36 @@ class UserDAO extends BaseDAO {
         }
         $conn->close();
         return $users;
-    }    
+    }
+
+    public static function saveOrUpdate($user) {
+        if ($user['userId']) {
+            return UserDAO::update($user);
+        } else {
+            return UserDAO::save($user);
+        }
+    }
+
+    public static function save($user) {
+        $user = NULL;
+        $sql = "INSERT INTO User(username, password, name, isAdmin) VALUES('{$user['username']}', {$user['password']}, {$user['name']}, {$user['isAdmin']});";
+        $conn = parent::getConnection();
+        $result = $conn->query($sql);
+        if ($result) {
+            $id = $conn->insert_id;
+        } else {
+            $id = false;
+        }
+        $conn->close();
+        return $id;
+    }
+
+    public static function update($user) {
+        $user = NULL;
+        $sql = "UPDATE User set username = '{$user['username']}', password = '{$user['password']}', name = '{$user['name']}', isAdmin = '{$user['isAdmin']}' where userId = '{$user['userId']}';";
+        $conn = parent::getConnection();
+        $result = $conn->query($sql);
+        $conn->close();
+        return $result;
+    }
 }
