@@ -107,4 +107,12 @@ class UserDAO extends BaseDAO {
         $conn->close();
         return $user;
     }
+
+    public static function delete($userId) {
+        $sql = "DELETE FROM User where userId = $userId";
+        $conn = parent::getConnection();
+        $result = $conn->query($sql);
+        $conn->close();
+    }
+
 }

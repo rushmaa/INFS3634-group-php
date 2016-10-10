@@ -74,4 +74,12 @@ class JournalDao extends BaseDAO {
         $conn->close();
         return $journal;
     }
+
+    public static function delete($journalId) {
+        $sql = "DELETE FROM Journal where journalId = $journalId";
+        $conn = parent::getConnection();
+        $result = $conn->query($sql);
+        $conn->close();
+    }
+
 }

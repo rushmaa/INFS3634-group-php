@@ -38,6 +38,11 @@ $app->post('/users', function ($request, $response, $args) {
   return $response->withJson(UserDao::saveOrUpdate($user));
 });
 
+$app->delete('/users/[{id}]', function ($request, $response, $args) {
+  $obj = UserDao::delete($request->getAttribute('id'));
+});
+
+
 $app->get('/users/{id}/journals', function ($request, $response, $args) {
   return $response->withJson(JournalDao::getJournalsByUserId($request->getAttribute('id')));
 });
@@ -62,6 +67,10 @@ $app->get('/journals/[{id}]', function ($request, $response, $args) {
   } else {
     return $response->withStatus(404);
   }
+});
+
+$app->delete('/journals/[{id}]', function ($request, $response, $args) {
+  $obj = JournalDao::delete($request->getAttribute('id'));
 });
 
 $app->post('/journals', function ($request, $response, $args) {
