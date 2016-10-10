@@ -89,7 +89,8 @@ class UserDAO extends BaseDAO {
     }
 
     public static function save($user) {
-        $sql = "INSERT INTO User(username, password, name, isAdmin) VALUES('{$user['username']}', {$user['password']}, {$user['name']}, {$user['isAdmin']});";
+        $sql = "INSERT INTO User(username, password, name, isAdmin) VALUES('{$user['username']}', '{$user['password']}', '{$user['name']}', '{$user['isAdmin']}');";
+
         $conn = parent::getConnection();
         $result = $conn->query($sql);
         if ($result) {

@@ -57,8 +57,7 @@ class JournalDao extends BaseDAO {
     }
 
     public static function save($journal) {
-        $journal = NULL;
-        $sql = "INSERT INTO Journal(journalTitle, journalContent, userId) VALUES('{$journal['journalTitle']}', {$journal['journalContent']}, {$journal['userId']});";
+        $sql = "INSERT INTO Journal(journalTitle, journalContent, userId) VALUES('{$journal['journalTitle']}', '{$journal['journalContent']}', '{$journal['userId']}');";
         $conn = parent::getConnection();
         $result = $conn->query($sql);
         if ($result) {
@@ -71,8 +70,9 @@ class JournalDao extends BaseDAO {
     }
 
     public static function update($journal) {
-        $journal = NULL;
-        $sql = "UPDATE Journal set journalTitle = '{$journal['journalTitle']}', journalContent = '{$journal['journalContent']} where journalId = '{$journal['journalId']}';";
+        $sql = "UPDATE Journal set journalTitle = '{$journal['journalTitle']}', journalContent = '{$journal['journalContent']}' where journalId = '{$journal['journalId']}';";
+        echo $sql;
+
         $conn = parent::getConnection();
         $result = $conn->query($sql);
         $conn->close();
