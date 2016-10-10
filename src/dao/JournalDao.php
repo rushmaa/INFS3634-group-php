@@ -71,8 +71,6 @@ class JournalDao extends BaseDAO {
 
     public static function update($journal) {
         $sql = "UPDATE Journal set journalTitle = '{$journal['journalTitle']}', journalContent = '{$journal['journalContent']}' where journalId = '{$journal['journalId']}';";
-        echo $sql;
-
         $conn = parent::getConnection();
         $result = $conn->query($sql);
         $conn->close();

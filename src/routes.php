@@ -72,8 +72,7 @@ $app->post('/journals', function ($request, $response, $args) {
     'journalCreated' => $request->getParam('journalCreated'),
     'userId' => $request->getParam('userId')
   );
-  JournalDao::saveOrUpdate($journal);
-  // return $response->withJson(JournalDao::saveOrUpdate($journal));
+  return $response->withJson(JournalDao::saveOrUpdate($journal));
 });
 
 $app->get('/[{name}]', function ($request, $response, $args) {
