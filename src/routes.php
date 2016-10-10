@@ -35,7 +35,9 @@ $app->post('/users', function ($request, $response, $args) {
     'name' => $request->getParam('name'),
     'isAdmin' => $request->getParam('isAdmin')
   );
-  return $response->withJson(UserDao::saveOrUpdate($user));
+  UserDao::saveOrUpdate($user);
+  // return $response->withJson(UserDao::saveOrUpdate($user));
+  // return $response->withStatus(200, UserDao::saveOrUpdate($user));
 });
 
 $app->get('/users/{id}/journals', function ($request, $response, $args) {
