@@ -94,12 +94,10 @@ class UserDAO extends BaseDAO {
         $conn = parent::getConnection();
         $result = $conn->query($sql);
         if ($result) {
-            $id = $conn->insert_id;
-        } else {
-            $id = false;
+            $user['userId'] = $conn->insert_id;
         }
         $conn->close();
-        return $id;
+        return $user;
     }
 
     public static function update($user) {
@@ -107,6 +105,6 @@ class UserDAO extends BaseDAO {
         $conn = parent::getConnection();
         $result = $conn->query($sql);
         $conn->close();
-        return $result;
+        return $user;
     }
 }

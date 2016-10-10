@@ -61,12 +61,10 @@ class JournalDao extends BaseDAO {
         $conn = parent::getConnection();
         $result = $conn->query($sql);
         if ($result) {
-            $id = $conn->insert_id;
-        } else {
-            $id = false;
+            $journal['journalId'] = $conn->insert_id;
         }
         $conn->close();
-        return $id;
+        return $journal;
     }
 
     public static function update($journal) {
@@ -74,6 +72,6 @@ class JournalDao extends BaseDAO {
         $conn = parent::getConnection();
         $result = $conn->query($sql);
         $conn->close();
-        return $result;
+        return $journal;
     }
 }
