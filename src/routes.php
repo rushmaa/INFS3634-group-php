@@ -64,6 +64,17 @@ $app->get('/journals/[{id}]', function ($request, $response, $args) {
   }
 });
 
+$app->post('/journals', function ($request, $response, $args) {
+  $journal = array(
+    'journalId' => $request->getParam('journalId'),
+    'journalTitle' => $request->getParam('journalTitle'),
+    'journalContent' => $request->getParam('journalContent'),
+    'journalCreated' => $request->getParam('journalCreated'),
+    'userId' => $request->getParam('userId')
+  );
+  return $response->withJson(JournalDao::saveOrUpdate($journal));
+});
+
 $app->get('/[{name}]', function ($request, $response, $args) {
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
